@@ -50,6 +50,7 @@ async function startProcess (opts) {
 		} else if (msg.match(inUse)) {
 			reject(new Error(msg.substring(0, 10000)));
 		}
+		console.log(`Ngrok: ${data.toString()}`)
 	});  
 
 	ngrok.stderr.on('data', data => {
