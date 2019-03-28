@@ -16,6 +16,7 @@ let processPromise, activeProcess;
 
 async function getProcess(opts) {
 	console.log("Getting ngrok process")
+	console.log(process.pid)
 	if (processPromise) return processPromise; 
 	try {
 		processPromise = startProcess(opts);
@@ -55,6 +56,9 @@ async function startProcess (opts) {
 
 	ngrok.stderr.on('data', data => {
 		const msg = data.toString().substring(0, 10000);
+		console.log("Ngrok stderr")
+		console.log(msg)
+		console.log(process.pid)
 		reject(new Error(msg));
 	});
 
