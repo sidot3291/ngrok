@@ -15,6 +15,7 @@ let processPromise, activeProcess;
 */
 
 async function getProcess(opts) {
+	console.log("Getting ngrok process")
 	if (processPromise) return processPromise; 
 	try {
 		processPromise = startProcess(opts);
