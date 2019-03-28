@@ -56,7 +56,9 @@ async function startProcess (opts) {
 		reject(new Error(msg));
 	});
 
-	ngrok.on('exit', () => {
+	ngrok.on('exit', (code, signal) => {
+  		console.log('ngrok process exited with ' +
+              		`code ${code} and signal ${signal}`);		
 		processPromise = null;
 		activeProcess = null;
 	});
