@@ -63,7 +63,11 @@ async function startProcess (opts) {
 		activeProcess = null;
 	});
 
-	process.on('exit', async () => await killProcess());
+	process.on('exit', async (code, signal) => {
+  		console.log('root process exited with ' +
+              		`code ${code} and signal ${signal}`);	
+		await killProcess()
+	});
 
 	try {
 		const url = await apiUrl;
@@ -81,6 +85,7 @@ async function startProcess (opts) {
 }
 
 function killProcess ()  {
+	console.log("Kill process called");
 	if (!activeProcess) return;
 	return new Promise(resolve => {
 		activeProcess.on('exit', () => resolve());
